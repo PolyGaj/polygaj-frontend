@@ -7,6 +7,7 @@ const farms: FarmConfig[] = [
     risk: 5,
     isTokenOnly: false,
     lpSymbol: 'GAJ - USDC',
+    decimal: 18,
     lpAddresses: {
       97: '',
       56: '0x19e7cbecdd23a16dfa5573df54d98f7caae03019',
@@ -26,6 +27,7 @@ const farms: FarmConfig[] = [
     risk: 5,
     isTokenOnly: false,
     lpSymbol: 'GAJ - USDT',
+    decimal: 18,
     lpAddresses: {
       97: '',
       56: '0x19e7cbecdd23a16dfa5573df54d98f7caae03019',
@@ -44,6 +46,7 @@ const farms: FarmConfig[] = [
     pid: 1,
     risk: 3,
     lpSymbol: 'WMATIC - USDC',
+    decimal: 18,
     lpAddresses: {
       97: '',
       56: '0x6e7a5fafcec6bb1e78bae2a1f0b612012bf14827',
@@ -63,6 +66,7 @@ const farms: FarmConfig[] = [
     risk: 5,
     isTokenOnly: true,
     lpSymbol: 'GAJ',
+    decimal: 18,
     lpAddresses: {
       97: '',
       56: '0x19e7cbecdd23a16dfa5573df54d98f7caae03019',
@@ -83,6 +87,7 @@ const farms: FarmConfig[] = [
     isTokenOnly: true,
     risk: 3,
     lpSymbol: 'WMATIC',
+    decimal: 18,
     lpAddresses: {
       97: '',
       56: '0x6e7a5fafcec6bb1e78bae2a1f0b612012bf14827',
@@ -102,6 +107,7 @@ const farms: FarmConfig[] = [
     isTokenOnly: true,
     risk: 3,
     lpSymbol: 'MUST',
+    decimal: 18,
     lpAddresses: {
       97: '',
       56: '0x6e7a5fafcec6bb1e78bae2a1f0b612012bf14827',
@@ -121,6 +127,7 @@ const farms: FarmConfig[] = [
     isTokenOnly: true,
     risk: 3,
     lpSymbol: 'WBTC',
+    decimal: 6,
     lpAddresses: {
       97: '',
       56: '0x6e7a5fafcec6bb1e78bae2a1f0b612012bf14827',
@@ -140,6 +147,7 @@ const farms: FarmConfig[] = [
     isTokenOnly: true,
     risk: 3,
     lpSymbol: 'WETH',
+    decimal: 18,
     lpAddresses: {
       97: '',
       56: '0x6e7a5fafcec6bb1e78bae2a1f0b612012bf14827',
@@ -159,6 +167,7 @@ const farms: FarmConfig[] = [
     risk: 5,
     isTokenOnly: true,
     lpSymbol: 'KRILL',
+    decimal: 18,
     lpAddresses: {
       97: '',
       56: '0x19e7cbecdd23a16dfa5573df54d98f7caae03019',
@@ -178,6 +187,7 @@ const farms: FarmConfig[] = [
     isTokenOnly: true,
     risk: 3,
     lpSymbol: 'USDC',
+    decimal: 6,
     lpAddresses: {
       97: '',
       56: '0x6e7a5fafcec6bb1e78bae2a1f0b612012bf14827',
@@ -197,6 +207,7 @@ const farms: FarmConfig[] = [
     isTokenOnly: true,
     risk: 3,
     lpSymbol: 'USDT',
+    decimal: 6,
     lpAddresses: {
       97: '',
       56: '0x6e7a5fafcec6bb1e78bae2a1f0b612012bf14827',

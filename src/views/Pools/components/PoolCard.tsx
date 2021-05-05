@@ -163,7 +163,7 @@ const PoolCard: React.FC<HarvestProps> = ({ pool }) => {
                     isOldSyrup
                       ? async () => {
                           setPendingTx(true)
-                          await onUnstake('0')
+                          await onUnstake('0', 18)
                           setPendingTx(false)
                         }
                       : onPresentWithdraw

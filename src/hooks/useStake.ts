@@ -5,18 +5,18 @@ import { fetchFarmUserDataAsync, updateUserStakedBalance, updateUserBalance } fr
 import { stake, sousStake, sousStakeBnb } from 'utils/callHelpers'
 import { useMasterchef, useSousChef } from './useContract'
 
-const useStake = (pid: number) => {
+const useStake = (pid: number, decimal: number) => {
   const dispatch = useDispatch()
   const { account } = useWallet()
   const masterChefContract = useMasterchef()
 
   const handleStake = useCallback(
     async (amount: string) => {
-      const txHash = await stake(masterChefContract, pid, amount, account)
+      const txHash = await stake(masterChefContract, pid, amount, account, decimal)
       dispatch(fetchFarmUserDataAsync(account))
       console.info(txHash)
     },
-    [account, dispatch, masterChefContract, pid],
+    [account, dispatch, masterChefContract, pid, decimal],
   )
 
   return { onStake: handleStake }
@@ -29,9 +29,9 @@ export const useSousStake = (sousId, isUsingBnb = false) => {
   const sousChefContract = useSousChef(sousId)
 
   const handleStake = useCallback(
-    async (amount: string) => {
+    async (amount: string, decimal: number) => {
       if (sousId === 0) {
-        await stake(masterChefContract, 0, amount, account)
+        await stake(masterChefContract, 0, amount, account, decimal)
       } else if (isUsingBnb) {
         await sousStakeBnb(sousChefContract, amount, account)
       } else {

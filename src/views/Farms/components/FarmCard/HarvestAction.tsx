@@ -10,6 +10,7 @@ import useStake from '../../../../hooks/useStake'
 interface FarmCardActionsProps {
   earnings?: BigNumber
   pid?: number
+  decimal?: number
 }
 
 const BalanceAndCompound = styled.div`
@@ -19,13 +20,13 @@ const BalanceAndCompound = styled.div`
   flex-direction: column;
 `
 
-const HarvestAction: React.FC<FarmCardActionsProps> = ({ earnings, pid }) => {
+const HarvestAction: React.FC<FarmCardActionsProps> = ({ earnings, pid, decimal }) => {
   const TranslateString = useI18n()
   const [pendingTx, setPendingTx] = useState(false)
   const { onReward } = useHarvest(pid)
-  const { onStake } = useStake(pid)
+  const { onStake } = useStake(pid, decimal)
 
-  const rawEarningsBalance = getBalanceNumber(earnings)
+  const rawEarningsBalance = getBalanceNumber(earnings, decimal)
   const displayBalance = rawEarningsBalance.toLocaleString()
 
   return (
