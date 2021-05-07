@@ -36,6 +36,10 @@ const config: MenuEntry[] = [
       {
         label: 'Dapp Radar',
         href: 'https://dappradar.com/polygon/defi/polygaj-finance'
+      },
+      {
+        label: 'Dapp.com',
+        href: 'https://www.dapp.com/app/polygaj-network'
       }
     ],
   },

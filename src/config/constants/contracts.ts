@@ -37,4 +37,9 @@ export default {
     97: '',
     137: '0xc2132D05D31c914a87C6611C10748AEb04B58e8F' // USDT
   },
+  weth: {
+    56: '0xe9e7cea3dedca5984780bafc599bd69add087d56',
+    97: '',
+    137: '0x7ceb23fd6bc0add59e62ac25578270cff1b9f619' // WETH
+  },
 }
