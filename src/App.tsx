@@ -17,6 +17,7 @@ const Farms = lazy(() => import('./views/Farms'))
 // const Pools = lazy(() => import('./views/Pools'))
 // const Ifos = lazy(() => import('./views/Ifos'))
 const NotFound = lazy(() => import('./views/NotFound'))
+const Buy = lazy(() => import('./views/Buy'))
 // const Nft = lazy(() => import('./views/Nft'))
 
 // This config is required for number formating
@@ -51,6 +52,9 @@ const App: React.FC = () => {
             <Route path="/pools">
               <Farms tokenMode/>
             </Route>
+            <Route path="/buy">
+              <Buy />
+            </Route>
             {/* <Route path="/pools"> */}
             {/*  <Pools /> */}
             {/* </Route> */}
@@ -64,9 +68,6 @@ const App: React.FC = () => {
             {/*  <Nft /> */}
             {/* </Route> */}
             {/* Redirect */}
-            {/* <Route path="/staking"> */}
-            {/*  <Redirect to="/pools" /> */}
-            {/* </Route> */}
             {/* <Route path="/syrup"> */}
             {/*  <Redirect to="/pools" /> */}
             {/* </Route> */}

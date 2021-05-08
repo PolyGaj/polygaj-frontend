@@ -19,4 +19,8 @@ const getContract = (abi: any, address: string, contractOptions?: ContractOption
   return new web3.eth.Contract((abi as unknown) as AbiItem, address, contractOptions)
 }
 
-export { getWeb3, getContract, httpProvider }
+const isAddress = (address: string) => {
+  return Web3.utils.isAddress(address)
+}
+
+export { getWeb3, getContract, httpProvider, isAddress }
