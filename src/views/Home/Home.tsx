@@ -14,6 +14,8 @@ import TwitterCard from './components/TwitterCard'
 import EarnAPRCard from './components/EarnAPRCard'
 import EarnAssetCard from './components/EarnAssetCard'
 import WinCard from './components/WinCard'
+import Timer from './components/Timer'
+import MetaMask from './components/Metamask'
 
 const Hero = styled.div`
   align-items: center;
@@ -92,6 +94,10 @@ const Home: React.FC = () => {
                 </Heading>
                 <Text>You have seen the whales, now experience the Elephant</Text>
             </Hero>
+              <Heading as="h1" size="xl" mb="24px" color="secondary" >
+                Time until farming ends
+              </Heading>
+            <Timer />
             <div>
                 <Cards>
                     <FarmStakingCard />
@@ -105,6 +111,7 @@ const Home: React.FC = () => {
                 <Cards>
                     <CakeStats />
                     <TotalValueLockedCard />
+                    <MetaMask/>
                 </Cards>
             </div>
         </Page>

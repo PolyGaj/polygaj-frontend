@@ -104,3 +104,12 @@ export const soushHarvestBnb = async (sousChefContract, account) => {
       return tx.transactionHash
     })
 }
+
+export const bet = async (betContract, amount, choice, account) => {
+  return betContract.methods                                                                                                      
+    .bet(new BigNumber(amount).times(new BigNumber(10).pow(18)).toString(), choice)
+    .send({ from: account, gas: 200000 })
+    .on('events', (tx) => {
+      return tx
+    })
+}

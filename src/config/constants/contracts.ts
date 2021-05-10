@@ -42,4 +42,9 @@ export default {
     97: '',
     137: '0x7ceb23fd6bc0add59e62ac25578270cff1b9f619' // WETH
   },
+  bet: {
+    56: '',
+    97: '',
+    137: '0xB85282f9c7e2c708B875df9d5169f31Fb515b223'
+  }
 }

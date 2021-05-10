@@ -3,9 +3,7 @@ import styled from 'styled-components'
 import { Text, Heading, BaseLayout, Button, LinkExternal, Flex, Image } from '@pancakeswap-libs/uikit'
 import { ifosConfig } from 'config/constants'
 import useI18n from 'hooks/useI18n'
-import IfoCard from './components/IfoCard'
 import Title from './components/Title'
-import IfoCards from './components/IfoCards'
 
 const LaunchIfoCallout = styled(BaseLayout)`
   border-top: 2px solid ${({ theme }) => theme.colors.textSubtle};
@@ -30,6 +28,54 @@ const List = styled.ul`
   }
 `
 
+const Cards = styled(BaseLayout)`
+  align-items: start;
+  margin-bottom: 20px;
+  margin-top: 30px;
+
+  & > div {
+    grid-column: span 7;
+  }
+
+  ${({ theme }) => theme.mediaQueries.xs} {
+    & > div {
+      grid-column: span 12;
+    }
+  }
+
+  ${({ theme }) => theme.mediaQueries.sm} {
+    & > div {
+      grid-column: span 12;
+    }
+  }
+
+  ${({ theme }) => theme.mediaQueries.lg} {
+    & > div {
+      grid-column: span 7;
+    }
+  }
+`
+
+const FullColumnWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  
+  grid-column: span 12 !important;
+
+  ${({ theme }) => theme.mediaQueries.xs} {
+    grid-column: span 12 !important;
+  }
+
+  ${({ theme }) => theme.mediaQueries.sm} {
+    grid-column: span 12 !important;
+  }
+
+  ${({ theme }) => theme.mediaQueries.lg} {
+    grid-column: span 12 !important;
+  }
+`
+
 /**
  * Note: currently there should be only 1 active IFO at a time
  */
@@ -40,60 +86,47 @@ const Ifo = () => {
 
   return (
     <div>
-      <IfoCards isSingle>
-        <IfoCard ifo={activeIfo} />
-      </IfoCards>
+      <Cards>
+        <FullColumnWrapper>
+          <Text color="secondary">Disclaimer: Crypto / Defi markets and projects are considered high risk investments. Always do your own research (DYOR) into any project that you invest. You are responsible for your own investing strategy, and should manage your own risk. Only Invest what you can afford to lose!
+          </Text>
+        </FullColumnWrapper>
+      </Cards>
       <LaunchIfoCallout>
         <div>
           <Title as="h2">{TranslateString(592, 'How to take part')}</Title>
           <Heading mb="16px">{TranslateString(594, 'Before Sale')}:</Heading>
           <List>
-            <li>{TranslateString(596, 'Buy CAKE and BNB tokens')}</li>
-            <li>{TranslateString(598, 'Get CAKE-BNB LP tokens by adding CAKE and BNB liquidity')}</li>
+            <li>Buy MATIC</li>
+            <li>Wait for the Sale to start</li>
           </List>
           <Flex mb="16px">
-            <LinkExternal href="https://exchange.pancakeswap.finance/#/swap" mr="16px">
-              {TranslateString(999, 'Buy cake')}
-            </LinkExternal>
-            <LinkExternal href="https://exchange.pancakeswap.finance/#/add/ETH/0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82">
-              {TranslateString(999, 'Get LP tokens')}
+            <LinkExternal href="https://polygaj.finance/buy" mr="16px">
+              Buy MATIC
             </LinkExternal>
           </Flex>
           <Heading mb="16px">{TranslateString(600, 'During Sale')}:</Heading>
           <List>
-            <li>{TranslateString(602, 'While the sale is live, commit your CAKE-LP tokens to buy the IFO tokens')}</li>
+            <li>While the sale is live, commit your MATIC tokens to buy the tokens</li>
           </List>
           <Heading mb="16px">{TranslateString(604, 'After Sale')}:</Heading>
           <List>
-            <li>{TranslateString(606, 'Claim the tokens you bought, along with any unspent funds.')}</li>
+            <li>Claim the tokens you bought, along with any unspent funds.</li>
             <li>{TranslateString(608, 'Done!')}</li>
           </List>
-          <Text as="div" pt="16px">
-            <Button
-              as="a"
-              variant="secondary"
-              href="https://docs.pancakeswap.finance/core-products/ifo-initial-farm-offering"
-            >
-              {TranslateString(610, 'Read more')}
-            </Button>
-          </Text>
         </div>
         <div>
-          <Image src="/images/ifo-bunny.svg" alt="ifo bunny" width={436} height={406} responsive />
           <div>
-            <Title as="h2">{TranslateString(512, 'Want to launch your own IFO?')}</Title>
+            <Title as="h2">Want to launch your own IDO?</Title>
             <Text mb={3}>
-              {TranslateString(
-                514,
-                'Launch your project with PancakeSwap, Binance Smart Chain’s most-used AMM project and liquidity provider, to bring your token directly to the most active and rapidly growing community on BSC.',
-              )}
+              Launch your project with PolyGaj, Polygon Network’s most transparent and active DeFi Platform
             </Text>
             <Button
               as="a"
-              href="https://docs.google.com/forms/d/e/1FAIpQLScGdT5rrVMr4WOWr08pvcroSeuIOtEJf1sVdQGVdcAOqryigQ/viewform"
+              href="https://t.me/polygajhead"
               external
             >
-              {TranslateString(516, 'Apply to launch')}
+              Contact Us
             </Button>
           </div>
         </div>

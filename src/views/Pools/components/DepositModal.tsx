@@ -11,15 +11,16 @@ interface DepositModalProps {
   onConfirm: (amount: string) => void
   onDismiss?: () => void
   tokenName?: string
+  burnFeeBP?: number
 }
 
 const DepositModal: React.FC<DepositModalProps> = ({ max, onConfirm, onDismiss, tokenName = '' }) => {
   const [val, setVal] = useState('')
   const [pendingTx, setPendingTx] = useState(false)
   const TranslateString = useI18n()
-  const fullBalance = useMemo(() => {
-    return getFullDisplayBalance(max)
-  }, [max])
+  const fullBalance = useMemo(() => getFullDisplayBalance(max), [max])
+
+  // console.log("depositFeeBP",burnFeeBP)
 
   const handleChange = useCallback(
     (e: React.FormEvent<HTMLInputElement>) => {
@@ -40,6 +41,7 @@ const DepositModal: React.FC<DepositModalProps> = ({ max, onConfirm, onDismiss, 
         onChange={handleChange}
         max={fullBalance}
         symbol={tokenName}
+        // burnFee={burnFeeBP}
       />
       <ModalActions>
         <Button fullWidth variant="secondary" onClick={onDismiss}>

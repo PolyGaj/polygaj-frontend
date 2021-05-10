@@ -1,6 +1,7 @@
 import { Ifo } from './types'
 
 const ifos: Ifo[] = [
+  /*
   {
     id: 'blink',
     address: '0x44a9Cc8463EC00937242b660BF65B10365d99baD',
@@ -96,6 +97,7 @@ const ifos: Ifo[] = [
     tokenDecimals: 18,
     releaseBlockNumber: 4086064,
   },
+  */
 ]
 
 export default ifos

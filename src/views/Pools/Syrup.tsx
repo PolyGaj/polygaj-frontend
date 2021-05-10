@@ -70,12 +70,12 @@ const Farm: React.FC = () => {
       <Hero>
         <div>
           <Heading as="h1" size="xxl" mb="16px">
-            {TranslateString(282, 'SYRUP Pool')}
+            Jungle Pools
           </Heading>
           <ul>
-            <li>{TranslateString(580, 'Stake CAKE to earn new tokens.')}</li>
-            <li>{TranslateString(404, 'You can unstake at any time.')}</li>
-            <li>{TranslateString(406, 'Rewards are calculated per block.')}</li>
+            <li>Stake GAJ to earn new tokens</li>
+            <li>You can unstake at any time.</li>
+            <li>Rewards are calculated per block</li>
           </ul>
         </div>
         <img src="/images/syrup.png" alt="SYRUP POOL icon" width={410} height={191} />

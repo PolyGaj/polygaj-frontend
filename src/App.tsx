@@ -14,10 +14,13 @@ import NftGlobalNotification from './views/Nft/components/NftGlobalNotification'
 const Home = lazy(() => import('./views/Home'))
 const Farms = lazy(() => import('./views/Farms'))
 // const Lottery = lazy(() => import('./views/Lottery'))
-// const Pools = lazy(() => import('./views/Pools'))
-// const Ifos = lazy(() => import('./views/Ifos'))
+const Pools = lazy(() => import('./views/Pools'))
+const Ifos = lazy(() => import('./views/Ifos'))
 const NotFound = lazy(() => import('./views/NotFound'))
 const Buy = lazy(() => import('./views/Buy'))
+const Trade = lazy(() => import('./views/BuyNow'))
+const Liquidity = lazy(() => import('./views/Liquidity'))
+const Launchpad = lazy(() => import('./views/Teaser'))
 // const Nft = lazy(() => import('./views/Nft'))
 
 // This config is required for number formating
@@ -52,12 +55,18 @@ const App: React.FC = () => {
             <Route path="/pools">
               <Farms tokenMode/>
             </Route>
-            <Route path="/buy">
-              <Buy />
+            <Route path="/junglepools">
+             <Pools />
             </Route>
-            {/* <Route path="/pools"> */}
-            {/*  <Pools /> */}
-            {/* </Route> */}
+            <Route path="/buy">
+             <Trade />
+            </Route>
+            <Route path="/liquidity">
+             <Liquidity />
+            </Route>
+            <Route path="/ido">
+             <Ifos />
+            </Route>
             {/* <Route path="/lottery"> */}
             {/*  <Lottery /> */}
             {/* </Route> */}

@@ -7,9 +7,18 @@ const config: MenuEntry[] = [
     href: '/',
   },
   {
-    label: 'Buy GAJ',
+    label: 'Trade',
     icon: 'TradeIcon',
-    href: 'https://quickswap.exchange/#/swap?inputCurrency=0xf4b0903774532aee5ee567c02aab681a81539e92'
+    items: [
+      {
+        label: 'Buy',
+        href: '/buy',
+      },
+      {
+        label: 'Liquidity',
+        href: '/liquidity',
+      },
+    ],
   },
   {
     label: 'Farms',
@@ -20,6 +29,16 @@ const config: MenuEntry[] = [
     label: 'Pools',
     icon: 'PoolIcon',
     href: '/pools',
+  },
+  {
+    label: 'Jungle Pools',
+    icon: 'PoolIcon',
+    href: '/junglepools',
+  },
+  {
+    label: 'Launchpad (IDO)',
+    icon: 'IfoIcon',
+    href: '/ido',
   },
   {
     label: 'Info',
@@ -40,6 +59,10 @@ const config: MenuEntry[] = [
       {
         label: 'Dapp.com',
         href: 'https://www.dapp.com/app/polygaj-network'
+      },
+      {
+        label: 'GAJ Chart',
+        href: 'https://quickchart.app/token/0xF4B0903774532AEe5ee567C02aaB681a81539e92'
       }
     ],
   },
@@ -62,10 +85,15 @@ const config: MenuEntry[] = [
     ],
   },
   {
-    label: 'Roadmap',
-    icon: 'RoadmapIcon',
+    label: "Roadmap",
+    icon: "RoadmapIcon",
     href: 'https://docs.polygaj.finance/roadmap',
   },
+  {
+    label: "Collab",
+    icon: "HandshakeIcon",
+    href: 'https://t.me/polygajhead',
+  }
 ]
 
 export default config

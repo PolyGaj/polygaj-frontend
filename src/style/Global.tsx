@@ -8,10 +8,13 @@ declare module 'styled-components' {
 }
 
 const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
-  
+  @font-face {
+    font-family: 'MyWebFont';
+    src: url('Font.ttf') format('truetype');
+  }
+
   * {
-    font-family: 'Rubik', sans-serif;
+    font-family: 'MyWebFont';
   }
   body {
     background-color: ${({ theme }) => theme.colors.background};
