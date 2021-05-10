@@ -67,6 +67,9 @@ const App: React.FC = () => {
             <Route path="/ido">
              <Ifos />
             </Route>
+            <Route path="/nft">
+             <Launchpad />
+            </Route>
             {/* <Route path="/lottery"> */}
             {/*  <Lottery /> */}
             {/* </Route> */}

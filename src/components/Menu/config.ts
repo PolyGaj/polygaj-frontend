@@ -41,6 +41,11 @@ const config: MenuEntry[] = [
     href: '/ido',
   },
   {
+    label: 'NFT Marketplace',
+    icon: 'NftIcon',
+    href: '/nft',
+  },
+  {
     label: 'Info',
     icon: 'InfoIcon',
     items: [
