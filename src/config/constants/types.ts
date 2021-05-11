@@ -28,6 +28,7 @@ export enum QuoteToken {
   'UST' = 'UST',
   'USDT' = 'USDT',
   'WETH' = 'WETH',
+  'GAJ' = 'GAJ',
 }
 
 export enum PoolCategory {
@@ -67,8 +68,9 @@ export interface PoolConfig {
   tokenName: string
   stakingTokenName: QuoteToken
   stakingLimit?: number
-  stakingTokenAddress?: string
+  stakingTokenAddress?: Address
   contractAddress: Address
+  rewardTokenAddress: Address
   poolCategory: PoolCategory
   projectLink: string
   tokenPerBlock: string
@@ -76,6 +78,7 @@ export interface PoolConfig {
   harvest?: boolean
   isFinished?: boolean
   tokenDecimals: number
+  burnFee: number
 }
 
 export type Nft = {

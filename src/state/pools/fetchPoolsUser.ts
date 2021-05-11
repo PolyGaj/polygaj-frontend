@@ -1,11 +1,8 @@
-import { AbiItem } from 'web3-utils'
-import poolsConfig from 'config/constants/pools'
-import masterChefABI from 'config/abi/masterchef.json'
-import sousChefABI from 'config/abi/sousChef.json'
+import pools from 'config/constants/pools'
 import erc20ABI from 'config/abi/erc20.json'
+import sousChefABI from 'config/abi/sousChef.json'
 import { QuoteToken } from 'config/constants/types'
 import multicall from 'utils/multicall'
-import { getMasterChefAddress } from 'utils/addressHelpers'
 import { getWeb3 } from 'utils/web3'
 import BigNumber from 'bignumber.js'
 
@@ -13,15 +10,13 @@ const CHAIN_ID = process.env.REACT_APP_CHAIN_ID
 
 // Pool 0, Cake / Cake is a different kind of contract (master chef)
 // BNB pools use the native BNB token (wrapping ? unwrapping is done at the contract level)
-const nonBnbPools = poolsConfig.filter((p) => p.stakingTokenName !== QuoteToken.BNB)
-const bnbPools = poolsConfig.filter((p) => p.stakingTokenName === QuoteToken.BNB)
-const nonMasterPools = poolsConfig.filter((p) => p.sousId !== 0)
+const nonBnbPools = pools.filter((p) => p.stakingTokenName !== QuoteToken.BNB)
+const bnbPools = pools.filter((p) => p.stakingTokenName === QuoteToken.BNB)
 const web3 = getWeb3()
-const masterChefContract = new web3.eth.Contract((masterChefABI as unknown) as AbiItem, getMasterChefAddress())
 
 export const fetchPoolsAllowance = async (account) => {
   const calls = nonBnbPools.map((p) => ({
-    address: p.stakingTokenAddress,
+    address: p.stakingTokenAddress[CHAIN_ID],
     name: 'allowance',
     params: [account, p.contractAddress[CHAIN_ID]],
   }))
@@ -36,7 +31,7 @@ export const fetchPoolsAllowance = async (account) => {
 export const fetchUserBalances = async (account) => {
   // Non BNB pools
   const calls = nonBnbPools.map((p) => ({
-    address: p.stakingTokenAddress,
+    address: p.stakingTokenAddress[CHAIN_ID],
     name: 'balanceOf',
     params: [account],
   }))
@@ -57,43 +52,45 @@ export const fetchUserBalances = async (account) => {
 }
 
 export const fetchUserStakeBalances = async (account) => {
-  const calls = nonMasterPools.map((p) => ({
-    address: p.contractAddress[CHAIN_ID],
-    name: 'userInfo',
-    params: [account],
-  }))
-  const userInfo = await multicall(sousChefABI, calls)
-  const stakedBalances = nonMasterPools.reduce(
-    (acc, pool, index) => ({
-      ...acc,
-      [pool.sousId]: new BigNumber(userInfo[index].amount._hex).toJSON(),
-    }),
-    {},
+  const cakePools = pools
+  const cakeUserInfo = await multicall(
+    sousChefABI,
+    cakePools.map((p) => ({
+      address: p.contractAddress[CHAIN_ID],
+      name: 'userInfo',
+      params: [account],
+    })),
   )
 
-  // Cake / Cake pool
-  const { amount: masterPoolAmount } = await masterChefContract.methods.userInfo('0', account).call()
-
-  return { ...stakedBalances, 0: new BigNumber(masterPoolAmount).toJSON() }
+  return {
+    ...pools.reduce(
+      (acc, pool, index) => ({
+        ...acc,
+        [pool.sousId]: new BigNumber(cakeUserInfo[index]?.amount._hex).toJSON(),
+      }),
+      {},
+    ),
+  }
 }
 
 export const fetchUserPendingRewards = async (account) => {
-  const calls = nonMasterPools.map((p) => ({
-    address: p.contractAddress[CHAIN_ID],
-    name: 'pendingReward',
-    params: [account],
-  }))
-  const res = await multicall(sousChefABI, calls)
-  const pendingRewards = nonMasterPools.reduce(
-    (acc, pool, index) => ({
-      ...acc,
-      [pool.sousId]: new BigNumber(res[index]).toJSON(),
-    }),
-    {},
+  const cakePools = pools
+  const res = await multicall(
+    sousChefABI,
+    cakePools.map((p) => ({
+      address: p.contractAddress[CHAIN_ID],
+      name: 'pendingReward',
+      params: [account],
+    })),
   )
 
-  // Cake / Cake pool
-  const pendingReward = await masterChefContract.methods.pendingEgg('0', account).call()
-
-  return { ...pendingRewards, 0: new BigNumber(pendingReward).toJSON() }
+  return {
+    ...pools.reduce(
+      (acc, pool, index) => ({
+        ...acc,
+        [pool.sousId]: new BigNumber(res[index]).toJSON(),
+      }),
+      {},
+    ),
+  }
 }

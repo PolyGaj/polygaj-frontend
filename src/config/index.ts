@@ -5,8 +5,8 @@ BigNumber.config({
   DECIMAL_PLACES: 80,
 })
 
-export const CAKE_PER_BLOCK = new BigNumber(1)
-export const BLOCKS_PER_YEAR = new BigNumber(10512000)
-export const BSC_BLOCK_TIME = 3
+export const CAKE_PER_BLOCK = new BigNumber(0.5)
+export const BLOCKS_PER_YEAR = new BigNumber(15768000)
+export const BSC_BLOCK_TIME = 2
 
 export const CAKE_POOL_PID = 1

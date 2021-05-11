@@ -2,7 +2,12 @@ import { useEffect, useState } from 'react'
 import { AbiItem } from 'web3-utils'
 import { ContractOptions } from 'web3-eth-contract'
 import useWeb3 from 'hooks/useWeb3'
-import { getMasterChefAddress, getCakeAddress, getLotteryAddress, getLotteryTicketAddress } from 'utils/addressHelpers'
+import {
+  getMasterChefAddress,
+  getCakeAddress,
+  getLotteryAddress,
+  getLotteryTicketAddress,
+} from 'utils/addressHelpers'
 import { poolsConfig } from 'config/constants'
 import { PoolCategory } from 'config/constants/types'
 import ifo from 'config/abi/ifo.json'
@@ -13,7 +18,9 @@ import lottery from 'config/abi/lottery.json'
 import lotteryTicket from 'config/abi/lotteryNft.json'
 import masterChef from 'config/abi/masterchef.json'
 import sousChef from 'config/abi/sousChef.json'
-import sousChefBnb from 'config/abi/sousChefBnb.json'
+import smartChefBnb from 'config/abi/sousChefBnb.json'
+
+const CHAIN_ID = process.env.REACT_APP_CHAIN_ID
 
 const useContract = (abi: AbiItem, address: string, contractOptions?: ContractOptions) => {
   const web3 = useWeb3()
@@ -43,7 +50,6 @@ export const useERC20 = (address: string) => {
 export const useCake = () => {
   return useERC20(getCakeAddress())
 }
-
 export const useRabbitMintingFarm = (address: string) => {
   const rabbitMintingFarmAbi = (rabbitmintingfarm as unknown) as AbiItem
   return useContract(rabbitMintingFarmAbi, address)
@@ -69,11 +75,11 @@ export const useMasterchef = () => {
   return useContract(abi, getMasterChefAddress())
 }
 
-export const useSousChef = (id) => {
+export const useSmartChef = (id: number) => {
   const config = poolsConfig.find((pool) => pool.sousId === id)
-  const rawAbi = config.poolCategory === PoolCategory.BINANCE ? sousChefBnb : sousChef
+  const rawAbi = config.poolCategory === PoolCategory.BINANCE ? smartChefBnb : sousChef
   const abi = (rawAbi as unknown) as AbiItem
-  return useContract(abi, config.contractAddress[process.env.REACT_APP_CHAIN_ID])
+  return useContract(abi, config.contractAddress[CHAIN_ID])
 }
 
 export default useContract

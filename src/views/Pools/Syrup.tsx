@@ -10,14 +10,18 @@ import partition from 'lodash/partition'
 import useI18n from 'hooks/useI18n'
 import useBlock from 'hooks/useBlock'
 import { getBalanceNumber } from 'utils/formatBalance'
-import { useFarms, usePriceBnbBusd, usePools } from 'state/hooks'
-import { QuoteToken, PoolCategory } from 'config/constants/types'
+import {
+  useFarms,
+  usePriceBnbBusd,
+  usePools,
+} from 'state/hooks'
+import { QuoteToken } from 'config/constants/types'
 import FlexLayout from 'components/layout/Flex'
 import Page from 'components/layout/Page'
-import Coming from './components/Coming'
 import PoolCard from './components/PoolCard'
 import PoolTabButtons from './components/PoolTabButtons'
 import Divider from './components/Divider'
+import Coming from './components/Coming'
 
 const Farm: React.FC = () => {
   const { path } = useRouteMatch()
@@ -30,7 +34,7 @@ const Farm: React.FC = () => {
 
   const priceToBnb = (tokenName: string, tokenPrice: BigNumber, quoteToken: QuoteToken): BigNumber => {
     const tokenPriceBN = new BigNumber(tokenPrice)
-    if (tokenName === 'BNB') {
+    if (tokenName === 'BNB' || tokenName === 'WBNB') {
       return new BigNumber(1)
     }
     if (tokenPrice && quoteToken === QuoteToken.BUSD) {
@@ -40,25 +44,33 @@ const Farm: React.FC = () => {
   }
 
   const poolsWithApy = pools.map((pool) => {
-    const isBnbPool = pool.poolCategory === PoolCategory.BINANCE
     const rewardTokenFarm = farms.find((f) => f.tokenSymbol === pool.tokenName)
     const stakingTokenFarm = farms.find((s) => s.tokenSymbol === pool.stakingTokenName)
 
     // /!\ Assume that the farm quote price is BNB
-    const stakingTokenPriceInBNB = isBnbPool ? new BigNumber(1) : new BigNumber(stakingTokenFarm?.tokenPriceVsQuote)
+    const stakingTokenPriceInBNB = priceToBnb(
+      QuoteToken.GAJ,
+      stakingTokenFarm?.tokenPriceVsQuote,
+      stakingTokenFarm?.quoteTokenSymbol,
+    )
     const rewardTokenPriceInBNB = priceToBnb(
       pool.tokenName,
       rewardTokenFarm?.tokenPriceVsQuote,
       rewardTokenFarm?.quoteTokenSymbol,
     )
-
+    // console.log('pool.tokenName', pool.tokenName)
+    // console.log('rewardTokenPriceInBNB', rewardTokenPriceInBNB.toString())
+    // console.log('stakingTokenPriceInBNB', stakingTokenPriceInBNB.toString())
     const totalRewardPricePerYear = rewardTokenPriceInBNB.times(pool.tokenPerBlock).times(BLOCKS_PER_YEAR)
-    const totalStakingTokenInPool = stakingTokenPriceInBNB.times(getBalanceNumber(pool.totalStaked))
+    let totalStakingTokenInPool = new BigNumber(0)
+    totalStakingTokenInPool = stakingTokenPriceInBNB.times(getBalanceNumber(pool.totalStaked))
+
+    // tokens per block * price of CAKE * blocks_per_year / ( tokens in pool x salt price) * 100
     const apy = totalRewardPricePerYear.div(totalStakingTokenInPool).times(100)
 
     return {
       ...pool,
-      isFinished: pool.sousId === 0 ? false : pool.isFinished || block > pool.endBlock,
+      isFinished: pool.isFinished || block > pool.endBlock,
       apy,
     }
   })
@@ -110,7 +122,6 @@ const Hero = styled.div`
   margin-left: auto;
   margin-right: auto;
   max-width: 250px;
-  padding: 48px 0;
   ul {
     margin: 0;
     padding: 0;
