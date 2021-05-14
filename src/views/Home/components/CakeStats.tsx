@@ -31,8 +31,9 @@ const CakeStats = () => {
   const circSupply = totalSupply ? totalSupply.minus(burnedBalance) : new BigNumber(0);
   const cakeSupply = getBalanceNumber(circSupply);
   const marketCap = eggPrice.times(circSupply);
-
   let gajPerBlock = 0;
+  const burnValue = eggPrice.times(burnedBalance);
+  const cakePrice = usePriceCakeBusd();
   if(farms && farms[0] && farms[0].gajPerBlock){
     gajPerBlock = new BigNumber(farms[0].gajPerBlock).div(new BigNumber(10).pow(18)).toNumber();
   }
@@ -41,27 +42,39 @@ const CakeStats = () => {
     <StyledCakeStats>
       <CardBody>
         <Heading size="xl" mb="24px">
-          {TranslateString(534, 'Egg Stats')}
+          {TranslateString(534, 'GAJ Stats')}
         </Heading>
         <Row>
-          <Text fontSize="14px">{TranslateString(536, 'Total GAJ Supply')}</Text>
-          {cakeSupply && <CardValue fontSize="14px" value={cakeSupply} decimals={0} />}
+          <Text fontSize="14px">GAJ Price</Text>
+          <CardValue fontSize="14px" value={eggPrice.toNumber()} decimals={2} prefix="$" />
         </Row>
         <Row>
-          <Text fontSize="14px">{TranslateString(999, 'Market Cap')}</Text>
-          <CardValue fontSize="14px" value={getBalanceNumber(marketCap)} decimals={0} prefix="$" />
+          <Text fontSize="14px">Maximum Mint</Text>
+          <Text bold fontSize="14px">3,888,000</Text>
+        </Row>
+        <Row>
+          <Text fontSize="14px">Total Minted</Text>
+          {totalSupply && <CardValue fontSize="14px" value={getBalanceNumber(totalSupply)} decimals={0} />}
+        </Row>
+        <Row>
+          <Text fontSize="14px">Circulating Supply</Text>
+          {cakeSupply && <CardValue fontSize="14px" value={cakeSupply} decimals={0} />}
         </Row>
         <Row>
           <Text fontSize="14px">{TranslateString(538, 'Total GAJ Burned')}</Text>
           <CardValue fontSize="14px" value={getBalanceNumber(burnedBalance)} decimals={0} />
         </Row>
         <Row>
-          <Text fontSize="14px">{TranslateString(540, 'New EGG/block')}</Text>
-          <Text bold fontSize="14px">{gajPerBlock}</Text>
+          <Text fontSize="14px">Burn Value</Text>
+          <CardValue fontSize="14px" value={getBalanceNumber(burnValue)} decimals={0} prefix="$" />
         </Row>
         <Row>
-          <Text fontSize="14px">Maximum Supply</Text>
-          <Text bold fontSize="14px">3,888,000</Text>
+          <Text fontSize="14px">{TranslateString(999, 'Market Cap')}</Text>
+          <CardValue fontSize="14px" value={getBalanceNumber(marketCap)} decimals={0} prefix="$" />
+        </Row>
+        <Row>
+          <Text fontSize="14px">{TranslateString(540, 'New GAJ/block')}</Text>
+          <Text bold fontSize="14px">{gajPerBlock}</Text>
         </Row>
       </CardBody>
     </StyledCakeStats>
