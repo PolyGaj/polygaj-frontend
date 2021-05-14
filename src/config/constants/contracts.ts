@@ -42,5 +42,9 @@ export default {
     97: '',
     137: '0x7ceb23fd6bc0add59e62ac25578270cff1b9f619' // WETH
   },
-  
+  forest: {
+    56: '',
+    97: '',
+    137: '0x4b17699c4990265D35875C15D5377571159f6bfd'
+  },
 }

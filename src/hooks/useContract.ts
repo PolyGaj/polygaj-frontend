@@ -7,6 +7,7 @@ import {
   getCakeAddress,
   getLotteryAddress,
   getLotteryTicketAddress,
+  getForestAddress
 } from 'utils/addressHelpers'
 import { poolsConfig } from 'config/constants'
 import { PoolCategory } from 'config/constants/types'
@@ -19,6 +20,7 @@ import lotteryTicket from 'config/abi/lotteryNft.json'
 import masterChef from 'config/abi/masterchef.json'
 import sousChef from 'config/abi/sousChef.json'
 import smartChefBnb from 'config/abi/sousChefBnb.json'
+import forest from 'config/abi/forest.json'
 
 const CHAIN_ID = process.env.REACT_APP_CHAIN_ID
 
@@ -81,5 +83,12 @@ export const useSmartChef = (id: number) => {
   const abi = (rawAbi as unknown) as AbiItem
   return useContract(abi, config.contractAddress[CHAIN_ID])
 }
+
+export const useForest = () => {
+  const abi = (forest as unknown) as AbiItem
+  return useContract(abi, getForestAddress())
+}
+
+
 
 export default useContract

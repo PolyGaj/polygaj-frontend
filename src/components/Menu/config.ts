@@ -30,6 +30,7 @@ const config: MenuEntry[] = [
     icon: 'PoolIcon',
     href: '/pools',
   },
+
   {
     label: 'Jungle Pools',
     icon: 'PoolIcon',
@@ -44,6 +45,11 @@ const config: MenuEntry[] = [
     label: 'NFT Marketplace',
     icon: 'NftIcon',
     href: '/nft',
+  },
+  {
+    label: 'King of Elephants',
+    icon: 'NftIcon',
+    href: '/kingofelephants'
   },
   {
     label: 'Info',

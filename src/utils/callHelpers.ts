@@ -98,3 +98,23 @@ export const smartHarvestBnb = async (sousChefContract, account) =>
     .deposit()
     .send({ from: account, value: new BigNumber(0) })
     .on('transactionHash', (tx) => tx.transactionHash)
+
+export const participateForest = async (blackContract, amount, account) => {
+  // console.log('amount', new BigNumber(amount).times(new BigNumber(10).pow(18)).toString())
+  return blackContract.methods
+    .participate(new BigNumber(amount).times(new BigNumber(10).pow(18)).toString(), 100)
+    // .participate("2", 100)
+    .send({ from: account, gasPrice: '7000000000'  })
+    .on('transactionHash', (tx) => {
+      return tx
+    })
+}
+
+export const claimForest = async (blackContract, account) => {
+  return blackContract.methods
+    .claimReward()
+    .send({ from: account})
+    .on('transactionHash', (tx) => {
+      return tx
+    })
+}

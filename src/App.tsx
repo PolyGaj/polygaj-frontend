@@ -7,7 +7,6 @@ import { useFetchPublicData } from 'state/hooks'
 import GlobalStyle from './style/Global'
 import Menu from './components/Menu'
 import PageLoader from './components/PageLoader'
-import NftGlobalNotification from './views/Nft/components/NftGlobalNotification'
 
 // Route-based code splitting
 // Only pool is included in the main bundle because of it's the most visited page'
@@ -21,6 +20,7 @@ const Buy = lazy(() => import('./views/Buy'))
 const Trade = lazy(() => import('./views/BuyNow'))
 const Liquidity = lazy(() => import('./views/Liquidity'))
 const Launchpad = lazy(() => import('./views/Teaser'))
+const KingOfElephants = lazy(() => import('./views/KingOfElephants'))
 // const Nft = lazy(() => import('./views/Nft'))
 
 // This config is required for number formating
@@ -69,6 +69,9 @@ const App: React.FC = () => {
             </Route>
             <Route path="/nft">
              <Launchpad />
+            </Route>
+            <Route path="/kingOfElephants">
+             <KingOfElephants />
             </Route>
             {/* <Route path="/lottery"> */}
             {/*  <Lottery /> */}
