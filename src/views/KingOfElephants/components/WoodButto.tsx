@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 const StyledDiv = styled.div`
   position: relative;
-  color: white;
+  color: primary;
   font-size: 26px;
   border-radius: 4px;
   width: 100%;

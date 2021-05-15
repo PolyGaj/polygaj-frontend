@@ -53,6 +53,7 @@ const PoolCard: React.FC<HarvestProps> = ({ pool }) => {
     userData,
     stakingLimit,
     burnFee,
+    weeklyroi
   } = pool
 
   console.log("burnFee",burnFee)
@@ -179,12 +180,8 @@ const PoolCard: React.FC<HarvestProps> = ({ pool }) => {
             ))}
         </StyledCardActions>
         <StyledDetails>
-          <div style={{ flex: 1 }}>{TranslateString(736, 'APR')}:</div>
-          {isFinished || isOldSyrup || !apy || apy?.isNaN() || !apy?.isFinite() ? (
-            '-'
-          ) : (
-            <Balance fontSize="14px" isDisabled={isFinished} value={apy?.toNumber()} decimals={2} unit="%" />
-          )}
+          <div style={{ flex: 1 }}>Weekly ROI:</div>
+          {weeklyroi}
         </StyledDetails>
         <StyledDetails>
           <div style={{ flex: 1 }}>

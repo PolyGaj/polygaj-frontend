@@ -113,7 +113,7 @@ const ParticipateCard: React.FC<ParticipateCardProps> = ({ hasWinner, nextStartT
                 </div>} */
                 <WoodButton onBid={onSubmit} disabled={pendingTx || isWaitingForNextGame} text="Bid Now"/>
               ) : (
-                <WoodButton onBid={onSubmit} disabled text="Waiting for Claim"/>
+                <WoodButton onBid={onSubmit} disabled text="Waiting for Claim" />
               )}
             </Flex>
           </>

@@ -528,6 +528,36 @@ const pools: PoolConfig[] = [
     isFinished: false,
     tokenDecimals: 18,
     burnFee: 100,
+    weeklyroi: '~ 60%'
+  }, 
+  {
+    sousId: 21,
+    tokenName: 'ELK',
+    stakingTokenName: QuoteToken.GAJ,
+    stakingTokenAddress: {
+      137: '0xF4B0903774532AEe5ee567C02aaB681a81539e92',
+      97: '',
+      56: '', // GAJ
+    },
+    contractAddress: {
+      137: '0x85Ac6e29ee5Ab7665701CfdCC443dF50d5E67e74',
+      97: '',
+      56: '', // SmartChef
+    },
+    rewardTokenAddress: {
+      137: '0xE1C8f3d529BEa8E3fA1FAC5B416335a2f998EE1C', // ELK
+      97: '', // DAI, didnt had WBNB
+      56: '', // WMATIC
+    },
+    poolCategory: PoolCategory.COMMUNITY,
+    projectLink: 'https://elk.finance/',
+    harvest: true,
+    tokenPerBlock: '0.002662037037037',
+    sortOrder: 2,
+    isFinished: false,
+    tokenDecimals: 18,
+    burnFee: 100,
+    weeklyroi: 'Starting Saturday 13:30 UTC'
   },
 ]
 

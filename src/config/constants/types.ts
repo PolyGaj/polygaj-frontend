@@ -79,6 +79,7 @@ export interface PoolConfig {
   isFinished?: boolean
   tokenDecimals: number
   burnFee: number
+  weeklyroi: string
 }
 
 export type Nft = {
